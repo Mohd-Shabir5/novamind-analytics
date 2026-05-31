@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const text = el.textContent.toLowerCase();
       const href = el.getAttribute('href');
       
-      // Ignore normal navigation back to IT Department portal
-      if (href === 'index.html') return;
+      // Ignore normal navigation back to IT Department portal or external departments website
+      if (href === 'index.html' || (href && href.includes('novamind-analytics-departments'))) return;
       
       if (href && href.startsWith('mailto:')) {
         e.preventDefault();
