@@ -82,4 +82,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // ── Contact Form Handling ──
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(contactForm);
+      const actionUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdTiS63jURQ8v4nCjUU110nvwaKk8XqvWj_dOo41zI5pwCS1A/formResponse';
+      
+      fetch(actionUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      }).then(() => {
+        showToast('✓ Message submitted successfully. Our team will contact you shortly.');
+        contactForm.reset();
+      }).catch((err) => {
+        showToast('⚠ There was an error submitting the form. Please try again later.');
+        console.error('Error submitting form:', err);
+      });
+    });
+  }
 });

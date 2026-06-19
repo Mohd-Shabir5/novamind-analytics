@@ -39,7 +39,8 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-cta">
-    <a href="https://mohd-shabir5.github.io/novamind-analytics-departments/" class="btn btn-nav-ghost">Employee Portal</a>
+    <a href="https://mohd-shabir5.github.io/novamind-analytics-departments/
+    " class="btn btn-nav-ghost">Employee Portal</a>
     <a href="#contact" class="btn btn-nav-primary">Get Started</a>
   </div>
 </nav>
@@ -555,10 +556,41 @@
       <div class="hero-tag" style="margin-bottom: 12px;">Get In Touch</div>
       <h2>Ready to Make Your Data Work?</h2>
       <p>Book a free 30-minute discovery call with our analytics team and see what NovaMind can do for your business.</p>
-      <div class="cta-actions">
-        <a href="mailto:hello@novamind-analytics.com" class="btn btn-primary" style="padding: 11px 24px;">Book a Discovery Call →</a>
-        <a href="mailto:hello@novamind-analytics.com" class="btn btn-ghost" style="padding: 11px 24px;">Contact Sales</a>
-      </div>
+      <form id="contact-form" class="cta-form">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="entry.522247970" required placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label for="workEmail">Work Email (Corporate Email)</label>
+          <input type="email" id="workEmail" name="entry.1718247016" required placeholder="john@company.com">
+        </div>
+        <div class="form-group">
+          <label for="companyName">Company Name</label>
+          <input type="text" id="companyName" name="entry.1226733838" required placeholder="Acme Corp">
+        </div>
+        <div class="form-group">
+          <label for="industry">Industry</label>
+          <select id="industry" name="entry.25739679" required>
+            <option value="" disabled selected>Select your industry</option>
+            <option value="Finance & Banking">Finance & Banking</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Retail & E-commerce">Retail & E-commerce</option>
+            <option value="Logistics">Logistics</option>
+            <option value="Manufacturing">Manufacturing</option>
+            <option value="Telecoms">Telecoms</option>
+            <option value="Real Estate">Real Estate</option>
+            <option value="Education">Education</option>
+            <option value="Technology">Technology</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">What would you like to discuss?</label>
+          <textarea id="message" name="entry.1315468913" rows="4" required placeholder="Tell us about your data challenges..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary submit-btn">Submit Request →</button>
+      </form>
     </div>
   </div>
 </section>
