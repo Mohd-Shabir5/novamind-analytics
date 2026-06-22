@@ -74,8 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
           window.location.href = href;
         }, 800);
       } else if (text.includes('demo') || text.includes('get started')) {
-        e.preventDefault();
-        showToast('✓ Demo request received! Our analytics team will contact you within 3 hours.');
+        // Allow normal anchor scroll to #contact
+        setTimeout(() => {
+          const firstInput = document.getElementById('fullName');
+          if (firstInput) firstInput.focus({ preventScroll: true });
+        }, 800);
       } else if (text.includes('explore') || text.includes('discover') || text.includes('solutions')) {
         // scroll is naturally handled if href is anchor, but we display visual feedback
         showToast('✓ Navigating to core services details...');
@@ -91,6 +94,27 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const formData = new FormData(contactForm);
       const actionUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdTiS63jURQ8v4nCjUU110nvwaKk8XqvWj_dOo41zI5pwCS1A/formResponse';
+      
+      // Capture UTM parameters from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+      let utmData = [];
+      
+      utms.forEach(param => {
+        if (urlParams.has(param)) {
+          utmData.push(`${param}: ${urlParams.get(param)}`);
+        }
+      });
+
+      // Append UTM data to the message field if any parameters exist
+      if (utmData.length > 0) {
+        const messageField = document.getElementById('message');
+        const currentMessage = messageField ? messageField.value : '';
+        const updatedMessage = currentMessage + '\n\n--- Tracking Info ---\n' + utmData.join('\n');
+        
+        // Update the form data for the message field using its Google Form entry ID
+        formData.set('entry.1315468913', updatedMessage);
+      }
       
       fetch(actionUrl, {
         method: 'POST',
