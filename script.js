@@ -116,25 +116,30 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.set('entry.1315468913', updatedMessage);
       }
       
-      fetch(actionUrl, {
+      const templateParams = {
+        fullName: document.getElementById('fullName').value,
+        workEmail: document.getElementById('workEmail').value,
+        companyName: document.getElementById('companyName').value,
+        industry: document.getElementById('industry').value,
+        message: document.getElementById('message').value
+      };
+
+      // 1. Send to Google Forms
+      const googleFetch = fetch(actionUrl, {
         method: 'POST',
         mode: 'no-cors',
         body: formData
-      }).then(() => {
-        // EmailJS Integration
-        emailjs.sendForm('service_oykcnju', 'template_t6be8wi', contactForm)
-          .then(() => {
-            console.log('EmailJS: Email sent successfully!');
-          }, (error) => {
-            console.error('EmailJS: Failed to send email.', error);
-          });
-        // ---------------------------
+      });
 
+      // 2. Send via EmailJS
+      const emailjsSend = emailjs.send('service_oykcnju', 'template_t6be8wi', templateParams)
+        .then(() => console.log('EmailJS: Email sent successfully!'))
+        .catch(err => console.error('EmailJS: Failed to send email.', err));
+
+      // Wait for both to finish (whether they succeed or fail), then show toast and reset
+      Promise.allSettled([googleFetch, emailjsSend]).then(() => {
         showToast('✓ Message submitted successfully. Our team will contact you shortly.');
         contactForm.reset();
-      }).catch((err) => {
-        showToast('⚠ There was an error submitting the form. Please try again later.');
-        console.error('Error submitting form:', err);
       });
     });
   }
