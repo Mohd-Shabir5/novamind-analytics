@@ -121,9 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
         mode: 'no-cors',
         body: formData
       }).then(() => {
-        // --- EmailJS Integration ---
-        // The user will replace "YOUR_SERVICE_ID" and "YOUR_TEMPLATE_ID" with their actual EmailJS Service ID and Template ID.
-        emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', contactForm)
+        // EmailJS Integration
+        emailjs.sendForm('service_oykcnju', 'template_t6be8wi', contactForm)
           .then(() => {
             console.log('EmailJS: Email sent successfully!');
           }, (error) => {
