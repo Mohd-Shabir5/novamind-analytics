@@ -134,7 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // 2. Send via EmailJS
       const emailjsSend = emailjs.send('service_oykcnju', 'template_t6be8wi', templateParams)
         .then(() => console.log('EmailJS: Email sent successfully!'))
-        .catch(err => console.error('EmailJS: Failed to send email.', err));
+        .catch(err => {
+          console.error('EmailJS: Failed to send email.', err);
+          alert('EmailJS Error: ' + (err.text || JSON.stringify(err) || err.message || 'Unknown error'));
+        });
 
       // Wait for both to finish (whether they succeed or fail), then show toast and reset
       Promise.allSettled([googleFetch, emailjsSend]).then(() => {
